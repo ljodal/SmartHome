@@ -15,7 +15,7 @@
 #
 job_type :custom, 'cd :path && tasks/:task'
 
-every :hour do
+every 15.minutes do
   custom "get_weather"
 end
 
