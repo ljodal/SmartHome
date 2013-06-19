@@ -22,15 +22,23 @@ module SmartHome
       erb :index
     end
 
+    get '/power_reading/last' do
+      Power::PowerReading.desc(:created_at).first.to_json
+    end
+
+    get '/power_reading/first' do
+      Power::PowerReading.asc(:created_at).first.to_json
+    end
+
     get '/power_reading' do
-      "Hello world"
+      erb :power_reading
     end
 
     post '/power_reading' do
       if params['value'] && params['time']
-        Power::PowerReading.create(value: params['value'], created_at: params['time'])
+        Power::PowerReading.create(value: params['value'].to_i, created_at: DateTime.parse(params['time']))
       elsif params['value']
-        Power::PowerReading.create(value: params['value'])
+        Power::PowerReading.create(value: params['value'].to_i)
       end
     end
 
