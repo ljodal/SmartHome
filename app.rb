@@ -22,6 +22,10 @@ module SmartHome
       erb :index
     end
 
+    get '/weather' do
+      Weather::Observation.desc(:time).limit(10).to_json
+    end
+
     get '/power_reading/last' do
       Power::PowerReading.desc(:created_at).first.to_json
     end
