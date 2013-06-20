@@ -29,7 +29,7 @@ module SmartHome
         station[:observations] = s.observations.exists(value: true).desc(:time).limit(hours.to_i+1)
         @stations << station
       end
-      
+
       if ext == ".json"
         @stations.to_json
       else
@@ -50,9 +50,9 @@ module SmartHome
     end
 
     post '/power_reading' do
-      if params['value'] && params['time']
+      if !params['value'].empty? && !params['time'].empty?
         Power::PowerReading.create(value: params['value'].to_i, created_at: DateTime.parse(params['time']))
-      elsif params['value']
+      elsif !params['value'].empty?
         Power::PowerReading.create(value: params['value'].to_i)
       end
     end
