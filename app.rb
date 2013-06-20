@@ -18,12 +18,23 @@ module SmartHome
 
 
     get '/' do
-      #Weather::Observation.all.to_json
       erb :index
     end
 
-    get '/weather' do
-      Weather::Observation.desc(:time).limit(10).to_json
+    get %r{/weather/(\d+)(\..*)?} do |hours, ext|
+      @stations = [];
+      Weather::WeatherStation.each do |s|
+        station = {}
+        station[:name] = s.name
+        station[:observations] = s.observations.exists(value: true).desc(:time).limit(hours.to_i+1)
+        @stations << station
+      end
+      
+      if ext == ".json"
+        @stations.to_json
+      else
+        "HTML"
+      end
     end
 
     get '/power_reading/last' do

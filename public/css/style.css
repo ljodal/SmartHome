@@ -1,0 +1,95 @@
+h1, h2, h3, h4, h5, h6, p, li, a {
+	font-family:'Avenir Next';
+}
+
+#page-title {
+	background:#293236;
+	height:80px;
+	line-height:80px;
+}
+
+#page-title h1 {
+	width:100%;
+	line-height:80px;
+	margin:0; padding:0;
+	text-align:center;
+	font-family:'Avenir Next';
+	font-weight:400;
+	font-size:36px;
+}
+
+#page-title h1 a {
+	display:block;
+	width:100%;
+	color:#FFFFFF;
+}
+
+#page-title h1 a:hover {
+	color:#2BA6CB;
+}
+
+#page-menu {
+	background:#161D20;
+	height:80px;
+	line-height:80px;
+	
+	margin-bottom:0px;
+}
+
+#page-menu li {
+	display:inline-block;
+}
+
+#page-menu li a {
+	display:block;
+	color:#6A777E;
+	height:80px;
+	line-height:80px;
+	padding:0px 10px;
+}
+
+#page-menu li a:hover {
+	color:#FFFFFF;
+}
+
+#sidebar {
+	background:#FCFCFD;
+}
+
+#content {
+	/*background:#1F282D;*/
+	background:#EAEDF1;
+}
+
+#content svg {
+	margin-bottom:20px;
+}
+
+/*
+ * Chart css
+ */
+.axis {
+  shape-rendering: crispEdges;
+  font-size:10px;
+}
+
+.x.axis line {
+  stroke: rgba(22,29,30,.2);
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: rgba(22,29,30,.2);
+}
+
+.label {
+	font-size:10px;
+}

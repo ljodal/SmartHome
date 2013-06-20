@@ -3,4 +3,4 @@ development:
     default:
       database: zrapport
       hosts:
-        - localhost:27017
+        - 192.168.1.2:27017

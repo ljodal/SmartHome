@@ -5,11 +5,21 @@
 
     <title>SmartHome</title>
 
-    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="/css/foundation.min.css" />
+	<link rel="stylesheet" href="/css/style.css" />
 
-    <script src="js/vendor/custom.modernizr.js"></script>
+    <script src="js/d3.v3.min.js"></script>
   </head>
   <body>
+	  <div class="row" id="top">
+		  <div class="large-3 columns" id="page-title">
+			  <h1><a href="/">SmartHome</a></h1>
+		  </div>
+		  <ul class="large-9 columns" id="page-menu">
+			  <li><a href="/weather">Weather</a></li>
+			  <li><a href="/power">Power consumption</a></li>
+		  </ul>
+	  </div>
     <%= yield %>
   </body>
 </html>
