@@ -47,7 +47,8 @@ function Timeline(data, options) {
 		
 		var svg = d3.select("#content").append("svg:svg")
 			.attr("width", width+margins[0]+margins[2])
-			.attr("height", height+margins[1]+margins[3]);
+			.attr("height", height+margins[1]+margins[3])
+			.attr("viewBox", "0 0 "+(width+margins[0]+margins[2])+" "+(height+margins[1]+margins[3]));
 			
 	    // Add the x-axis.
 	    svg.append("svg:g")
