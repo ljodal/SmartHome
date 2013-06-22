@@ -21,12 +21,16 @@ module SmartHome
       erb :index
     end
 
+    get '/blocks' do
+      erb :blocks
+    end
+
     get %r{/weather/(\d+)(\..*)?} do |hours, ext|
       @stations = [];
       Weather::WeatherStation.each do |s|
         station = {}
         station[:name] = s.name
-        station[:observations] = s.observations.exists(value: true).desc(:time).limit(hours.to_i+1)
+        station[:observations] = s.observations.exists(value: true).where(:time.gte => DateTime.now - hours.to_i.hours).desc(:time)
         @stations << station
       end
 
@@ -37,12 +41,24 @@ module SmartHome
       end
     end
 
+    get '/power' do
+      first = Power::PowerReading.asc(:created_at).first
+      last = Power::PowerReading.desc(:created_at).first
+
+      total = last.value - first.value
+      days = (last.created_at - first.created_at) / 1.day
+
+      avg = total / days
+
+      "Avg. power consumption pr. day: #{avg}"
+    end
+
     get '/power_reading/last' do
-      Power::PowerReading.desc(:created_at).first.to_json
+      Power::PowerReading.desc(:created_at).limit(10).to_json
     end
 
     get '/power_reading/first' do
-      Power::PowerReading.asc(:created_at).first.to_json
+      Power::PowerReading.asc(:created_at).limit(10).to_json
     end
 
     get '/power_reading' do

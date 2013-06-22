@@ -2,6 +2,10 @@ h1, h2, h3, h4, h5, h6, p, li, a {
 	font-family:'Avenir Next';
 }
 
+body {
+    background:#161D20;
+}
+
 #page-title {
 	background:#293236;
 	height:80px;
@@ -53,12 +57,12 @@ h1, h2, h3, h4, h5, h6, p, li, a {
 }
 
 #sidebar {
-	background:#FCFCFD;
+	/*background:#FCFCFD;*/
 }
 
 #content {
 	/*background:#1F282D;*/
-	background:#EAEDF1;
+	/*background:#EAEDF1;*/
 }
 
 #content svg {
@@ -72,10 +76,13 @@ h1, h2, h3, h4, h5, h6, p, li, a {
 .axis {
   shape-rendering: crispEdges;
   font-size:10px;
+  font-family:"Avenir Next";
+  fill:rgba(255,255,255,.5);
 }
 
 .x.axis line {
-  stroke: rgba(22,29,30,.2);
+    stroke-width: 2px;
+  stroke: rgba(255,255,255,.2);
 }
 
 .x.axis .minor {
@@ -93,4 +100,10 @@ h1, h2, h3, h4, h5, h6, p, li, a {
 
 .label {
 	font-size:10px;
+}
+
+@media all and (max-width: 400px) {
+    .columns {
+        width:100%;
+    }
 }
