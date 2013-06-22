@@ -79,6 +79,20 @@ function blocks() {
     return block;
 }
 
+function finn() {
+    function block(selection) {
+        selection.each(function(data) {
+            var div = d3.select(this).selectAll("a")
+                .data(data).enter()
+                .append("a")
+                .text(function(d) {return d.title;})
+                .attr("href", function(d) {return d.url;});
+        });
+    }
+
+    return block;
+}
+
 window.onload = function() {
     d3.json("/weather/48.json", function(data) {
         var container = d3.select("#blocks");
@@ -87,20 +101,32 @@ window.onload = function() {
 
         var colors = ["light-green", "light-blue"];
 
-        /*
-        container.selectAll(".block")
-            .data(data).enter()
-            .append("div")
-        */
-
-        container.selectAll(".block")
+        container.selectAll(".block.weather")
             .data(data).enter()
             .append("div")
             .attr("class", function(d, i) {
-                return "block columns small-6 "+colors[i%colors.length];
+                return "block weather columns small-6 "+colors[i%colors.length];
             })
             .call(b)
             .insert("h4", ":first-child")
             .text(function(d) {return d.name + " - temperature last 48 hours";});
+    });
+
+    d3.json("/finn.no", function(data) {
+        var container = d3.select("#blocks");
+
+        var colors = ["light-red", "yellow"];
+
+        var f = finn();
+
+        container.selectAll(".block.finn")
+            .data([data]).enter()
+            .append("div")
+            .attr("class", function(d, i) {
+                return "block finn columns small-3 "+colors[i%colors.length];
+            })
+            .call(f)
+            .insert("h4", ":first-child")
+            .text("B&W 686 on finn.no");
     });
 }

@@ -74,5 +74,25 @@ module SmartHome
     end
 
     run! if __FILE__ == $0
+
+    get '/finn.no' do
+      xpath = '//div[@id="resultList"]//div[contains(@class, "r-object media")]/div[contains(@class, "bd")]/div[contains(@class, "objectinfo")]'
+
+      url = "http://www.finn.no/finn/torget/resultat?keyword=686&SEGMENT=0&ITEM_CONDITION=0&SEARCHKEYNAV=SEARCH_ID_BAP_ALL&categories=93%3A3906%3A53&sort=5&periode="
+
+      doc = Nokogiri::HTML(open(url))
+
+      results = []
+
+      doc.xpath(xpath).each do |item|
+        top = item.xpath('div[@class = "line"]/h2/a').first
+        title = top.text
+        url = "http://www.finn.no/finn/torget/"+top["href"]
+
+        results << {title: title, url: url}
+      end
+
+      results.to_json
+    end
   end
 end
